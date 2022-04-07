@@ -11,14 +11,18 @@ jobs:
       name: Production
       url: 'https://gitnoter.com'
     steps:
-      - name: 'Install latest kubectl'
-        uses: azure/setup-kubectl@v2.0
+      - name: 'Install latest helm'
+        uses: azure/k8s-set-context@v2
+        with:
+          method: kubeconfig
+          kubeconfig: ${{ secrets.KUBECONFIG }}
 
       - name: 'Install latest helm'
         uses: azure/setup-helm@v1
 
       - name: Deploy to production
         env:
-          KUBECONFIG_FILE: '${{ secrets.KUBECONFIG }}'
           HELM_REPO: 'https://vivekweb2013.github.io/gitnoter-charts/'
-        run: echo I am deploying!
+        run: |
+          kubectl version
+          helm version
