@@ -11,13 +11,37 @@ jobs:
       name: Production
       url: 'https://gitnoter.com'
     steps:
-      - name: 'Install latest helm'
+      - name: Setup k8s
         uses: azure/k8s-set-context@v2
         with:
           method: kubeconfig
           kubeconfig: ${{ secrets.KUBECONFIG }}
+          
+      - name: Set regcred secret
+        uses: azure/k8s-create-secret@v2
+        with:
+          namespace: 'gn'
+          secret-type: 'kubernetes.io/dockerconfigjson'
+          secret-name: 'regcred'
+          string-data: ${{ secrets.REGCRED_SECRET }}
+          
+      - name: Set postgres-secret
+      - uses: azure/k8s-create-secret@v2
+        with:
+          namespace: 'gn'
+          secret-type: 'generic'
+          secret-name: postgres-secret
+          data:  ${{ secrets.POSTGRES_SECRET }}
+          
+      - name: Set auth-secret
+      - uses: azure/k8s-create-secret@v2
+        with:
+          namespace: 'gn'
+          secret-type: 'generic'
+          secret-name: auth-secret
+          data:  ${{ secrets.AUTH_SECRET }}
 
-      - name: 'Install latest helm'
+      - name: Setup helm
         uses: azure/setup-helm@v1
 
       - name: Deploy to production
