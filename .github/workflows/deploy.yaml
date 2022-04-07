@@ -26,7 +26,7 @@ jobs:
           string-data: ${{ secrets.REGCRED_SECRET }}
           
       - name: Set postgres-secret
-      - uses: azure/k8s-create-secret@v2
+        uses: azure/k8s-create-secret@v2
         with:
           namespace: 'gn'
           secret-type: 'generic'
@@ -34,7 +34,7 @@ jobs:
           data:  ${{ secrets.POSTGRES_SECRET }}
           
       - name: Set auth-secret
-      - uses: azure/k8s-create-secret@v2
+        uses: azure/k8s-create-secret@v2
         with:
           namespace: 'gn'
           secret-type: 'generic'
