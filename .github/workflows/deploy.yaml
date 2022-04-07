@@ -24,5 +24,4 @@ jobs:
         env:
           HELM_REPO: 'https://vivekweb2013.github.io/gitnoter-charts/'
         run: |
-          kubectl version
           helm version
