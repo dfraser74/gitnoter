@@ -17,9 +17,9 @@ jobs:
           method: kubeconfig
           kubeconfig: ${{ secrets.KUBECONFIG }}
 
-      - name: Create namespace
+      - name: Create namespace if not exist
         run: |
-          kubectl create namespace gn
+          kubectl create namespace <add-namespace-here> --dry-run=client -o yaml | kubectl apply -f -
 
       - name: Set regcred secret
         uses: azure/k8s-create-secret@v2
