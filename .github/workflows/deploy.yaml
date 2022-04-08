@@ -51,7 +51,7 @@ jobs:
           helm repo add gitnoter https://vivekweb2013.github.io/gitnoter-charts
           helm repo update
           
-          helm upgrade nginx-ingress ingress-nginx/ingress-nginx -n ingress-nginx --create-namespace --install --wait --version v1.1.3 --set controller.publishService.enabled=true
+          helm upgrade nginx-ingress ingress-nginx/ingress-nginx -n ingress-nginx --create-namespace --install --wait --version v3.41.0 --set controller.publishService.enabled=true
           helm upgrade cert-manager jetstack/cert-manager -n cert-manager --create-namespace --install --wait --version v1.8.0 --set installCRDs=true
           helm upgrade gitnoter gitnoter/gitnoter -n gn --create-namespace --install --wait
 
