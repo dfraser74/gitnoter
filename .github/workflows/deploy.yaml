@@ -27,7 +27,7 @@ jobs:
           namespace: 'gn'
           secret-type: 'kubernetes.io/dockerconfigjson'
           secret-name: 'regcred'
-          string-data: ${{ secrets.REGCRED_SECRET }}
+          data: ${{ secrets.REGCRED_SECRET }}
           
       - name: Set postgres-secret
         uses: azure/k8s-create-secret@v2
