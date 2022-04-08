@@ -17,10 +17,9 @@ jobs:
           method: kubeconfig
           kubeconfig: ${{ secrets.KUBECONFIG }}
 
-      - uses: Azure/k8s-deploy@v1.4
-        with:
-          namespace: "gn"
-          kubectl-version: "latest"
+      - name: Create namespace
+        run: |
+          kubectl create namespace gn
 
       - name: Set regcred secret
         uses: azure/k8s-create-secret@v2
